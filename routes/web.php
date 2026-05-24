@@ -1,27 +1,34 @@
 <?php
 
 use App\Http\Controllers\CategoriesController;
-use App\Http\Controllers\CustomersController;
-use App\Http\Controllers\Products\ProductsController;
-use App\Http\Controllers\Products\ProductStatusToggleController;
+use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\Settings\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 include '_utilities.php';
 
-Route::redirect('/', 'home');
+//Route::redirect('/', 'dashboard');
+
+Route::get('/', function () {
+    return view('frontend.index');
+});
 
 
 Route::group(['middleware' => ['auth:web']], function () {
 
-    Route::get('/home', function () {
-        return view('home');
+    Route::get('/dashboard', function () {
+        return view('admin.dashboard');
     })->name('home');
 
     Route::get('categories', [CategoriesController::class, 'index'])->name('categories.index');
     Route::post('categories', [CategoriesController::class, 'storeOrUpdate'])->name('categories.storeOrUpdate');
     Route::get('categories/{category}', [CategoriesController::class, 'edit'])->name('categories.edit');
     Route::delete('categories/{category}', [CategoriesController::class, 'destroy'])->name('categories.delete');
+
+    Route::get('products', [ProductsController::class, 'index'])->name('products.index');
+    Route::post('products', [ProductsController::class, 'storeOrUpdate'])->name('products.storeOrUpdate');
+    Route::get('products/{product}', [ProductsController::class, 'edit'])->name('products.edit');
+    Route::delete('products/{product}', [ProductsController::class, 'destroy'])->name('products.delete');
 
     Route::group(['prefix' => 'settings'], function () {
         Route::get('profile', [ProfileController::class, 'profile'])->name('settings.profile');
