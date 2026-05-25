@@ -13,6 +13,11 @@ Route::get('/', function () {
     return view('frontend.index');
 });
 
+Route::view('/about-us', 'frontend.about-us');
+Route::view('/loans', 'frontend.loans');
+Route::view('/contact-us', 'frontend.contact-us');
+
+Route::get('apply-loan',[\App\Http\Controllers\Frontends\ApplyLoanController::class,'index'])->name('frontend.apply-loan');
 
 Route::group(['middleware' => ['auth:web']], function () {
 

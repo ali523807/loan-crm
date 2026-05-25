@@ -26,25 +26,25 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="/about-us">
                         About
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="/loans">
                         Loans
                     </a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="/contact-us">
                         Contact
                     </a>
                 </li>
 
                 <li class="nav-item ms-lg-3">
-                    <a href="#" class="btn btn-primary px-4">
+                    <a href="{{ route('frontend.apply-loan') }}" class="btn btn-primary px-4">
                         Apply Now
                     </a>
                 </li>

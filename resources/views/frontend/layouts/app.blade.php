@@ -9,7 +9,9 @@
     <title>
         @yield('title', 'Loan CRM')
     </title>
-
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     @vite('resources/js/jquery.js')
     @vite('resources/js/jqueryui.js')
     @vite(['resources/sass/frontend.scss', 'resources/js/frontend.js'])
@@ -24,7 +26,7 @@
 @yield('content')
 
 @include('frontend.layouts.partials.footer')
-
+@stack('scripts')
 </body>
 
 </html>

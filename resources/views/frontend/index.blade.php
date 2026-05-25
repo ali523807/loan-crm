@@ -27,7 +27,7 @@
 
                     <div class="mt-4">
 
-                        <a href="#" class="btn btn-primary btn-lg px-5 me-3">
+                        <a href="{{ route('frontend.apply-loan') }}" class="btn btn-primary btn-lg px-5 me-3">
                             Apply Loan
                         </a>
 
@@ -47,6 +47,55 @@
                 </div>
 
             </div>
+
+        </div>
+
+    </section>
+
+    <!-- MARQUEE -->
+    <section class="marquee-section">
+
+        <div class="marquee-content">
+
+        <span>
+            <i class="bi bi-check-circle-fill"></i>
+            Low Rate Of Interest
+        </span>
+
+            <span>
+            <i class="bi bi-check-circle-fill"></i>
+            Minimum Documentation
+        </span>
+
+            <span>
+            <i class="bi bi-check-circle-fill"></i>
+            Safe & Secure
+        </span>
+
+            <span>
+            <i class="bi bi-check-circle-fill"></i>
+            Doorstep Service
+        </span>
+
+            <span>
+            <i class="bi bi-check-circle-fill"></i>
+            Fast Processing
+        </span>
+
+            <span>
+            <i class="bi bi-check-circle-fill"></i>
+            Instant Loan Approval
+        </span>
+
+            <span>
+            <i class="bi bi-check-circle-fill"></i>
+            No Hidden Charges
+        </span>
+
+            <span>
+            <i class="bi bi-check-circle-fill"></i>
+            Flexible EMI
+        </span>
 
         </div>
 
