@@ -13,6 +13,7 @@
         <ul class="sidebar-nav">
             <li class="sidebar-nav-heading mx-4 mb-2 text-xs text-gray-500">Platform</li>
 
+            @can('dashboard.view')
             <li class="sidebar-item">
                 <a href="{{ route('home') }}" wire:navigate
                    class="sidebar-link text-gray-600 font-bold {{ request()->routeIs('home') ? 'active' : '' }}">
@@ -20,23 +21,48 @@
                     <span class="ps-2">Dashboard</span>
                 </a>
             </li>
+            @endcan
 
+            @can('admin-users.view')
             <li class="sidebar-item">
-                <a href="{{ route('categories.index') }}" wire:navigate
-                   class="sidebar-link text-gray-600 font-bold {{ request()->routeIs('categories.index') ? 'active' : '' }}">
-                    <x-lucide-layout-grid class="w-4 h-4 text-slate-600"/>
-                    <span class="ps-2">Categories</span>
+                <a href="{{ route('admin-users.index') }}" wire:navigate
+                   class="sidebar-link text-gray-600 font-bold {{ request()->routeIs('admin-users.index') ? 'active' : '' }}">
+                    <x-lucide-users class="w-4 h-4 text-slate-600"/>
+                    <span class="ps-2">Admin Users</span>
+                </a>
+            </li>
+            @endcan
+
+            @can('leads.view')
+            <li class="sidebar-item">
+                <a href="{{ route('loan-applications.index') }}" wire:navigate
+                   class="sidebar-link text-gray-600 font-bold {{ request()->routeIs('loan-applications.*') ? 'active' : '' }}">
+                    <x-lucide-clipboard-list class="w-4 h-4 text-slate-600"/>
+                    <span class="ps-2">Leads</span>
                 </a>
             </li>
 
+            @endcan
+
+            @can('customers.view')
+                <li class="sidebar-item">
+                    <a href="{{ route('customers.index') }}" wire:navigate
+                       class="sidebar-link text-gray-600 font-bold {{ request()->routeIs('customers.*') ? 'active' : '' }}">
+                        <x-lucide-user-round class="w-4 h-4 text-slate-600"/>
+                        <span class="ps-2">Customers</span>
+                    </a>
+                </li>
+            @endcan
+
+            @can('roles.view')
             <li class="sidebar-item">
-                <a href="{{ route('products.index') }}" wire:navigate
-                   class="sidebar-link text-gray-600 font-bold {{ request()->routeIs('products.index') ? 'active' : '' }}">
-                    <x-lucide-layout-grid class="w-4 h-4 text-slate-600"/>
-                    <span class="ps-2">Products</span>
+                <a href="{{ route('roles.index') }}" wire:navigate
+                   class="sidebar-link text-gray-600 font-bold {{ request()->routeIs('roles.index') ? 'active' : '' }}">
+                    <x-lucide-shield-check class="w-4 h-4 text-slate-600"/>
+                    <span class="ps-2">Roles & Permissions</span>
                 </a>
             </li>
-
+            @endcan
 
         </ul>
     </div>

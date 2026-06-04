@@ -495,7 +495,7 @@ $.fn.jpDataTable = function (options = {}) {
         const filterSelectors = options.filters
             || ($el.data('filters') ? $el.data('filters').split(',') : []);
 
-        const ajaxUrl = options.ajax?.url || $el.data('url');
+        const ajaxUrl = options.ajax?.url || options.url || $el.data('url');
 
         // --- Bulk options (new) ---
         // default markup conventions:

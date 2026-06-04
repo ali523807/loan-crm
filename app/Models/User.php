@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -20,6 +22,7 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
+        'active',
     ];
 
     /**
@@ -44,7 +47,44 @@ class User extends Authenticatable implements MustVerifyEmail
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'active' => 'boolean',
         ];
+    }
+
+    public function roles(): BelongsToMany
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    public function assignedLoanApplications(): HasMany
+    {
+        return $this->hasMany(LoanApplication::class, 'assigned_to_id');
+    }
+
+    public function leadFollowUps(): HasMany
+    {
+        return $this->hasMany(LeadFollowUp::class);
+    }
+
+    public function hasRole(string $role): bool
+    {
+        return $this->roles->contains('name', $role);
+    }
+
+    public function isSuperAdmin(): bool
+    {
+        return $this->hasRole('super-admin');
+    }
+
+    public function hasPermissionTo(string $permission): bool
+    {
+        if ($this->isSuperAdmin()) {
+            return true;
+        }
+
+        return $this->roles
+            ->flatMap(fn (Role $role) => $role->permissions)
+            ->contains('name', $permission);
     }
 
     public function getInitialsAttribute()
@@ -53,7 +93,7 @@ class User extends Authenticatable implements MustVerifyEmail
         $words = preg_split('/\s+/', trim($name));
 
         if (count($words) >= 2) {
-            return strtoupper(mb_substr($words[0], 0, 1) . mb_substr($words[1], 0, 1));
+            return strtoupper(mb_substr($words[0], 0, 1).mb_substr($words[1], 0, 1));
         }
 
         return strtoupper(mb_substr($name, 0, 2));

@@ -2,6 +2,9 @@
 
 namespace App\Providers;
 
+use App\Models\Permission;
+use App\Models\User;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -19,6 +22,21 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        //
+        Gate::before(function (User $user, string $ability): ?bool {
+            $user->loadMissing('roles.permissions');
+
+            if ($user->isSuperAdmin()) {
+                return true;
+            }
+
+            try {
+                if (Permission::query()->where('name', $ability)->exists()) {
+                    return $user->hasPermissionTo($ability);
+                }
+            } catch (\Throwable) {
+            }
+
+            return null;
+        });
     }
 }

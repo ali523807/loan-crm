@@ -21,8 +21,16 @@
                     interest rate, and loan tenure.
                 </p>
 
-                <img src="https://cdn-icons-png.flaticon.com/512/2830/2830284.png"
-                     class="img-fluid emi-image mt-4">
+                <div class="emi-visual mt-4">
+                    <img src="https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?auto=format&fit=crop&w=900&q=80"
+                         class="img-fluid emi-image"
+                         alt="Loan officer calculating EMI with financial documents">
+
+                    <div class="emi-visual-badge">
+                        <i class="bi bi-calculator"></i>
+                        <span>Plan EMI before applying</span>
+                    </div>
+                </div>
 
             </div>
 
@@ -184,7 +192,7 @@
 
                     <div class="text-center mt-4">
 
-                        <a href="#" class="btn btn-primary btn-lg px-5">
+                        <a href="{{ route('frontend.apply-loan') }}" class="btn btn-primary btn-lg px-5">
                             Apply Loan
                         </a>
 
